@@ -25,7 +25,16 @@ recreated automatically when the app starts without them.
 
 ## Deploy to Streamlit Community Cloud
 
-1. Push this project to a GitHub repository.
-2. In [Streamlit Community Cloud](https://share.streamlit.io/), create an app
-   from that repository and select the branch and `app.py` as the main file.
-3. Deploy. Streamlit Cloud installs the packages listed in `requirements.txt`.
+This repository is ready to deploy from
+[Streamlit Community Cloud](https://share.streamlit.io/):
+
+1. Push the project to the `main` branch of
+   [`kuxl/news-genre-classifier`](https://github.com/kuxl/news-genre-classifier).
+2. Sign in to Streamlit Community Cloud with GitHub and choose **Create app**.
+3. Select repository `kuxl/news-genre-classifier`, branch `main`, and main file
+   `app.py`.
+4. Choose **Deploy**. Streamlit installs the packages from `requirements.txt`.
+
+The first launch downloads the BBC News dataset and NLTK English stopwords,
+then trains and saves the models in `models/`. These generated model files are
+not committed; if the deployment starts without them, it trains them again.
