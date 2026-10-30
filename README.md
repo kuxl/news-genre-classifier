@@ -1,9 +1,12 @@
-# News Genre Classifier
+# Naive Bayes Classifiers
 
-A Streamlit app that classifies news text into business, entertainment, politics,
-sport, or technology using Naive Bayes models trained on the BBC News dataset.
-It compares Multinomial Naive Bayes and Gaussian Naive Bayes, then uses the
-better-performing model.
+This repository contains two Streamlit apps:
+
+- `restaurent.py` classifies restaurant reviews as positive or negative using
+  the `output.csv` dataset.
+- `app.py` classifies news articles into five genres using the BBC News dataset.
+
+Both apps use the dependencies in `requirements.txt`.
 
 ## Run locally
 
@@ -11,30 +14,35 @@ better-performing model.
 python -m venv .venv
 ```
 
-Activate the virtual environment, then install the dependencies and start the app:
+Activate the virtual environment, then install the dependencies and start the
+app you want:
 
 ```bash
 python -m pip install -r requirements.txt
-python -m streamlit run app.py
+python -m streamlit run restaurent.py
 ```
 
-The app downloads the BBC News dataset and NLTK English stopwords when needed.
-On its first start, it trains both models and saves the selected model and
-metrics in `models/`. Those generated files are excluded from Git; they are
-recreated automatically when the app starts without them.
+For the news classifier, run `python -m streamlit run app.py` instead.
+The restaurant review app requires `output.csv` in the repository root. It
+downloads the NLTK English stopwords and WordNet data when first needed, then
+trains its model from the CSV.
+
+The news classifier downloads the BBC News dataset and NLTK English stopwords
+when needed. It trains and saves its model in `models/`; these generated files
+are excluded from Git and recreated automatically when missing.
 
 ## Deploy to Streamlit Community Cloud
 
-This repository is ready to deploy from
-[Streamlit Community Cloud](https://share.streamlit.io/):
+To deploy the restaurant review app:
 
-1. Push the project to the `main` branch of
-   [`kuxl/news-genre-classifier`](https://github.com/kuxl/news-genre-classifier).
-2. Sign in to Streamlit Community Cloud with GitHub and choose **Create app**.
-3. Select repository `kuxl/news-genre-classifier`, branch `main`, and main file
-   `app.py`.
+1. Push `restaurent.py`, `output.csv`, `requirements.txt`, and the other project
+   files to your GitHub repository. Make sure `output.csv` is included; the app
+   cannot run without it.
+2. Sign in to [Streamlit Community Cloud](https://share.streamlit.io/) with
+   GitHub and choose **Create app**.
+3. Select this repository, the branch you pushed, and `restaurent.py` as the
+   **Main file path**.
 4. Choose **Deploy**. Streamlit installs the packages from `requirements.txt`.
 
-The first launch downloads the BBC News dataset and NLTK English stopwords,
-then trains and saves the models in `models/`. These generated model files are
-not committed; if the deployment starts without them, it trains them again.
+The first prediction downloads the NLTK resources and trains the classifier.
+To deploy the news app instead, select `app.py` as the **Main file path**.
